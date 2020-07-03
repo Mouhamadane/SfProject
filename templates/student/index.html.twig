@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StudentController!{% endblock %}
+
+{% block body %}
+ <div class="col-lg-6">
+        <img class="card position-relative" src="../front_end/img/student.jpg" alt="">
+    </div>
+    <div class="col-sm-6 my-auto">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Ajouter un étudiant !</h1>
+        </div>
+        <span id="val" class="error-form"></span>
+        <form action="../controllers/addEtudiant.php" class="user" id="formulaire" method="post">
+            <div class="form-group">
+                <input type="text" name="first-name" id="prenom" class="form-control form-control-user" placeholder="Prénom" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <input type="text" name="last-name" id="nom" class="form-control form-control-user" placeholder="Nom" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <input type="email" name="mail" id="mail" class="form-control form-control-user" placeholder="Mail" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <input type="text" name="tel" id="tel" class="form-control form-control-user" placeholder="Téléphone" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="">Date de Naissance</label>
+                <input type="date" name="dateNaissance" id="tel" class="form-control form-control-user" placeholder="Téléphone" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <select name="type" id="type" class="form-control">
+                    <option value="nothing" checked>Type d'étudiant</option>
+                    <option value="bourgier">Boursier logé</option>
+                    <option value="boursierNonLoge">Boursier non logé</option>
+                    <option value="nonboursier">Non boursier</option>
+                </select>
+            </div>
+            <div id="add-champs" class="form-group"></div>
+            <button type="submit" name="envoyer" class="btn btn-primary btn-user btn-block"> Ajouter</button>
+            <hr>
+            <hr>
+        </form>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+$(document).ready(function(){
+    $('#type').change(function(){
+        if ($("#type").val()=="bourgier") {
+            $("#add-champs").children().remove();
+            $("#add-champs").append('<input type="text" name="bourse" id="bourse" class="form-control form-control-user" placeholder="Bourse" autocomplete="off" required><br>');
+            $("#add-champs").append('<input type="text" name="room" id="bourse" class="form-control form-control-user" placeholder="Numéro chambre" autocomplete="off" required>');
+        }else if($("#type").val()=="boursierNonLoge"){
+            $("#add-champs").children().remove();
+            $("#add-champs").append('<input type="text" name="adresse" id="adresse" class="form-control form-control-user" placeholder="Adresse" autocomplete="off">');
+        }
+ 
+    });
+});
+</script>
+{% endblock %}

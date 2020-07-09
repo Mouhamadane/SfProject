@@ -25,7 +25,7 @@ class Room
     private $typeRoom;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=25)
      */
     private $disponibilite;
 
@@ -33,6 +33,16 @@ class Room
      * @ORM\OneToMany(targetEntity=Student::class, mappedBy="numRoom")
      */
     private $numChambre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Building::class, inversedBy="rooms")
+     */
+    private $building;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $matricule;
 
     public function __construct()
     {
@@ -42,18 +52,6 @@ class Room
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumRoom(): ?int
-    {
-        return $this->numRoom;
-    }
-
-    public function setNumRoom(int $numRoom): self
-    {
-        $this->numRoom = $numRoom;
-
-        return $this;
     }
 
     public function getTypeRoom(): ?string
@@ -110,4 +108,29 @@ class Room
 
         return $this;
     }
+
+    public function getBuilding(): ?Building
+    {
+        return $this->building;
+    }
+
+    public function setBuilding(?Building $building): self
+    {
+        $this->building = $building;
+
+        return $this;
+    }
+
+    public function getMatricule(): ?string
+    {
+        return $this->matricule;
+    }
+
+    public function setMatricule(string $matricule): self
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
 }

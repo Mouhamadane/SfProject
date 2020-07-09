@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{controller_name}}{% endblock %}
+
+{% block body %}
+<div class="col-lg-12">
+    <div class="col-sm-6 my-auto">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Ajouter un Batiment !</h1>
+        </div>
+        <span id="val" class="error-form"></span>
+        
+        {{ form_start(form,{'attr':{'class':'user'}})}}
+            <div class="form-group">
+                {{ form_row(form.typeRoom,{'attr': {'class':'form-control'},'label':'Type de Chambre'})}}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.disponibilite,{'attr':{'class':'form-control'},'label':'Disponibilite'})}}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.building,{'attr':{'class':'form-control'},'label':'Nom du Batiment'})}}
+            </div>
+            <div>
+                <button type="submit" name="envoyer" class="btn btn-primary btn-user btn-block"> Ajouter</button>
+            </div>
+        {{ form_end(form)}}
+    
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

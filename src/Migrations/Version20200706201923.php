@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200703121756 extends AbstractMigration
+final class Version20200706201923 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,10 +22,7 @@ final class Version20200703121756 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE room DROP num_room');
-        $this->addSql('ALTER TABLE student ADD num_room_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE student ADD CONSTRAINT FK_B723AF3391146A7A FOREIGN KEY (num_room_id) REFERENCES room (id)');
-        $this->addSql('CREATE INDEX IDX_B723AF3391146A7A ON student (num_room_id)');
+        $this->addSql('ALTER TABLE room ADD num_room VARCHAR(255) NOT NULL, ADD matricule VARCHAR(255) NOT NULL, CHANGE disponibilite disponibilite VARCHAR(25) NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -33,9 +30,6 @@ final class Version20200703121756 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE room ADD num_room INT NOT NULL');
-        $this->addSql('ALTER TABLE student DROP FOREIGN KEY FK_B723AF3391146A7A');
-        $this->addSql('DROP INDEX IDX_B723AF3391146A7A ON student');
-        $this->addSql('ALTER TABLE student DROP num_room_id');
+        $this->addSql('ALTER TABLE room DROP num_room, DROP matricule, CHANGE disponibilite disponibilite VARCHAR(5) NOT NULL COLLATE utf8mb4_unicode_ci');
     }
 }

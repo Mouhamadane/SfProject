@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1 class="h3 mb-2 text-gray-800">{{controller_name}}</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste Chambre</h6>
+            <div id="alert_message"></div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="room" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Type</th>
+                            <th>Disponibilité</th>
+                            <th colspan="3" style="text-align: center">Action</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    {% for room in rooms %}
+                    <tr>
+                        <td>{{room.matricule}}</td>
+                        <td>{{room.typeRoom}}</td>
+                        <td>{{room.disponibilite}}</td>
+                        <td style="text-align: center"><a href="{{ path('editRoom', {'id': room.id})}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a></td>
+                        <td style="text-align: center"><a href="#" data-id="{{ room.id }}" title="supprimé" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">5 sur 12</div>
+                </div>
+                <div class="col-sm-12 col-md-5">
+                    <a type="submit" id="precedent" class="btn btn-secondary btn-lg">precedent</a>
+                <a type="submit" id="suivant" class="btn btn-lg btn-primary">suivant</a >
+                </div>
+            </div> 
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script src="/js/action.js"></script>
+{% endblock %}

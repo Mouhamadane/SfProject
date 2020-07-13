@@ -19,13 +19,12 @@
                             <th>Email</th>
                             <th>Bourse</th>
                             <th>Chambre</th>
-                            <th colspan="3" style="text-align: center">Action</td>
+                            <th style="text-align: center">Action</td>
                         </tr>
                     </thead>
                     <tbody id="tbody">
                     {% for student in students %}
-                    {% dump(student.numRoom)%}
-
+                    {{dump(student.numRoom)}}
                     <tr>
                         <td>{{student.fisrtName}}</td>
                         <td>{{student.lastName}}</td>
@@ -33,23 +32,16 @@
                         <td>{{student.DateNaissance | date('d/m/y')}}</td>
                         <td>{{student.email}}</td>
                         <td>{{student.bourse}}</td>
-                        <td>{{student.numRoom.matricule}}</td>
-                        <td style="text-align: center"><button class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></button></td>
-                        <td style="text-align: center"><button onclick="supprimer(this)" id="<?= $player['userID'] ?>" title="supprimé" name="delete" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button></td>
+                        <td>{{(student.numRoom.matricule)}}</td>
+                        <td style="text-align: center"><a href="{{path('editStudent',{id:student.id})}}" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
+                {{ knp_pagination_render(students) }}
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">5 sur 12</div>
-                </div>
-                <div class="col-sm-12 col-md-5">
-                    <button type="submit" id="precedent" class="btn btn-secondary btn-lg">precedent</button>
-                <button type="submit" id="suivant" class="btn btn-lg btn-primary">suivant</button >
-                </div>
-            </div> 
+           
         </div>
     </div>
+    <br><br><br><br><br>
 {% endblock %}

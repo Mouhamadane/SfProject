@@ -22,10 +22,12 @@ class StudentType extends AbstractType
             ->add('telephone')
             ->add('dateNaissance')
             ->add('typeStudent',ChoiceType::class,[
-                'choices'=>['Boursier Logé'=>'BL','boursier non logé'=>'BNL','Non Boursier'=>'NB',]
+                'choices'=>['Boursier Logé'=>'BL','boursier non logé'=>'BNL','Non Boursier'=>'NB',],
+                'placeholder' => "Type d'étudiant",
             ])
             ->add('bourse',ChoiceType::class,[
-                'choices'=>['Bourse'=>null,'Bourse Entière'=>'40000','Demi Bourse'=>'20000']
+                'choices'=>['Bourse Entière'=>'40000','Demi Bourse'=>'20000'],
+                'placeholder' => 'Bourse'
             ])
             ->add('adresse')
             ->add('numRoom',EntityType::class,[
@@ -33,6 +35,7 @@ class StudentType extends AbstractType
                 'choice_label'=>'matricule',
                 'multiple'=>false,
                 'expanded'=>false,
+                'placeholder' => 'Choisir numéro de chambre'
             ])
         ;
     }

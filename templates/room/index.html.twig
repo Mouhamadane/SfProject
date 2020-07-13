@@ -15,7 +15,7 @@
                             <th>Numéro</th>
                             <th>Type</th>
                             <th>Disponibilité</th>
-                            <th colspan="3" style="text-align: center">Action</td>
+                            <th colspan="2" style="text-align: center">Action</td>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -30,16 +30,8 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {{ knp_pagination_render(rooms) }}
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">5 sur 12</div>
-                </div>
-                <div class="col-sm-12 col-md-5">
-                    <a type="submit" id="precedent" class="btn btn-secondary btn-lg">precedent</a>
-                <a type="submit" id="suivant" class="btn btn-lg btn-primary">suivant</a >
-                </div>
-            </div> 
         </div>
     </div>
 {% endblock %}

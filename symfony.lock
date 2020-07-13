@@ -81,6 +81,12 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "knplabs/knp-components": {
+        "version": "v1.3.10"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v4.1.1"
+    },
     "monolog/monolog": {
         "version": "1.25.4"
     },
@@ -92,6 +98,18 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "omines/datatables-bundle": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.1",
+            "ref": "467488ddc00aa190c37a4357f226457d4dd6b339"
+        },
+        "files": [
+            "./config/packages/datatables.yaml"
+        ]
     },
     "php": {
         "version": "7.1"

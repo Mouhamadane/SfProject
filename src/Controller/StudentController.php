@@ -9,10 +9,8 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\StudentType;
 use App\Entity\Student;
-use App\Entity\Room;
-use App\Entity\Building;
-use App\Controller\RoomController;
 use App\Repository\StudentRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use DateTime;
 
 class StudentController extends AbstractController
@@ -47,16 +45,18 @@ class StudentController extends AbstractController
     }
     /**
      * @Route("/student", name="student")
-     * @Roue("/editStudent/{id}", name="editStudent")
+     * @Route("/editStudent/{id}", name="editStudent")
      * Method("GET","POST")
      */
-    public function index(Student $student, StudentRepository $repo, Request $request, EntityManagerInterface $manager)
+    public function index(Student $student=null, StudentRepository $repo, Request $request, EntityManagerInterface $manager)
     {
+        if (!$student) {
+            $student = new Student;
+        }
         // nombre etudiants sur la base
         $students = $repo->findAll();
         $nbr = count($students);
         // gerer form
-        $student = new Student;
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,12 +77,13 @@ class StudentController extends AbstractController
             'form'=>$form->createView(),
         ]);
     }
-     /**
+     /**        
      * @Route("/listStudent", name="listStudent")
      */
-    public function listStudent(StudentRepository $repo)
+    public function listStudent(Request $request, PaginatorInterface $paginator, StudentRepository $repo)
     {
-        $students = $repo->findAll();
+        $data = $repo->findAll();
+        $students = $paginator->paginate($data,$request->query->getInt('page', 1),6);
         return $this->render('student/listStudent.html.twig', [
             'controller_name' => 'Gérer Etudiant',
             'students' => $students,

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Room;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\BuildingRepository;
 use App\Form\RoomType;
 
@@ -40,9 +41,14 @@ class RoomController extends AbstractController
     /**
      * @Route("/room", name="room")
      */
-    public function index(RoomRepository $repo)
+    public function index(Request $request,RoomRepository $repo,PaginatorInterface $paginator)
     {
-        $rooms = $repo->findAll();
+        $data = $repo->findAll();
+        $rooms =  $paginator->paginate(
+            $data, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
         return $this->render('room/index.html.twig', [
             'controller_name' => 'Gestion Chambre',
             'rooms' =>$rooms,

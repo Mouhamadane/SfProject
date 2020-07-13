@@ -30,18 +30,11 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {{ knp_pagination_render(buildings) }}
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">5 sur 12</div>
-                </div>
-                <div class="col-sm-12 col-md-5">
-                    <button type="submit" id="precedent" class="btn btn-secondary btn-lg">precedent</button>
-                <button type="submit" id="suivant" class="btn btn-lg btn-primary">suivant</button >
-                </div>
-            </div> 
         </div>
     </div>
+    <br><br><br><br><br>
 {% endblock %}
 {% block javascripts %}
 <script src="/js/action.js"></script>

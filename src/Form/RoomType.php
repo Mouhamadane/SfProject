@@ -30,6 +30,7 @@ class RoomType extends AbstractType
                 'choice_label'=>'name',
                 'multiple'=>false,
                 'expanded'=>false,
+                'placeholder' => 'Choisir numéro de batiment'
             ])
         ;
     }

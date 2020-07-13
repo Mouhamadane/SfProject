@@ -8,9 +8,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\BuildingRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 use App\Entity\Building;
-use  Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class BuildingController extends AbstractController
@@ -18,9 +18,10 @@ class BuildingController extends AbstractController
     /**
      * @Route("/building", name="building")
      */
-    public function index(BuildingRepository $repo)
+    public function index(BuildingRepository $repo, Request $request, PaginatorInterface $paginator)
     {
-        $buildings = $repo->findAll();
+        $data = $repo->findAll();
+        $buildings = $paginator->paginate($data, $request->query->getInt('page',1),5);
         return $this->render('building/index.html.twig', [
             'controller_name' => 'Gestion Bâtiment',
             'buildings' =>$buildings,
